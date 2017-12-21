@@ -3,5 +3,5 @@
 @import url('./layout/base.css');
 @import url('./blocks/header.css');
 @import url('./blocks/nav.css');
-@import url('./blocks/main-page.css');
+@import url('./pages/main-page.css');
 @import url('./blocks/footer.css');

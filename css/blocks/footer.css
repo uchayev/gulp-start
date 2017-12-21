@@ -1,4 +1,6 @@
 .footer {
   height: px;
   margin-top: px;
+  min-width: px;
+  position: relative;
 }
