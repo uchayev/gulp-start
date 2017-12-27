@@ -49,3 +49,44 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   font-weight: normal;
 }
+
+a:active, a:focus { outline: none; }
+
+input, textarea {
+  outline:none;
+}
+
+input:active, textarea:active {
+  outline:none;
+}
+
+:focus {
+  outline:none;
+}
+
+textarea {
+  resize:none;
+}
+
+textarea {
+  resize:vertical;
+}
+textarea {
+  resize:horizontal;
+}
+
+:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+:focus::-moz-placeholder {
+  color: transparent;
+}
+
+:focus:-moz-placeholder {
+  color: transparent;
+}
+
+:focus:-ms-input-placeholder {
+  color: transparent;
+}
