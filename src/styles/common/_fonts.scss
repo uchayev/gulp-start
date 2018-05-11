@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'Имя';
+  src: url('./../fonts/имя.woff2') format('woff2'),
+       url('./../fonts/имя.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin имя($style) {
+  font-family: 'Имя', Arial, Helvetica, sans-serif;
+
+	@if $style == bold {
+    font-weight: bold;
+    font-style: normal;
+  }
+  @if $style == bold-italic {
+    font-weight: bold;
+    font-style: italic;
+  }
+  @if $style == italic {
+    font-weight: normal;
+    font-style: italic;
+  }
+  @if $style == light {
+    font-weight: 300;
+      font-style: normal;
+  }
+  @if $style == light-italic {
+    font-weight: 300;
+    font-style: italic;
+  }
+  @if $style == medium-italic {
+    font-weight: 500;
+    font-style: italic;
+  }
+  @if $style == medium {
+    font-weight: 500;
+    font-style: normal;
+  }
+  @if $style == normal {
+    font-weight: normal;
+    font-style: normal;
+	}
+}
