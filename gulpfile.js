@@ -122,7 +122,7 @@ function fonts() {
 }
 
 function pic() {
-  return gulp.src('src/images/*.*')
+  return gulp.src('src/images/**/*.*')
     .pipe(cache(imagemin([
       imagemin.gifsicle({interlaced: true}),
       imagemin.jpegtran({progressive: true}),
