@@ -65,7 +65,7 @@ function clean() {
 }
 
 function scripts() {
-  return gulp.src('src/scripts/app.js')
+  return gulp.src('src/scripts/**/*.js')
       .pipe(gulpWebpack(webpackConfig, webpack)) 
       .pipe(gulp.dest(paths.scripts.dest));
 }
