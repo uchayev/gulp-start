@@ -1,41 +1,35 @@
 {
   "name": "gulp-start",
   "version": "1.0.0",
-  "description": "Сборка для быстрого старта на основе Gulp",
-  "main": "gulpfile.js",
+  "description": "",
+  "main": "script.js",
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.23.6",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-cache": "^1.0.2",
+    "gulp-cheerio": "^0.6.2",
     "gulp-imagemin": "^4.1.0",
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-webpack": "^1.5.0",
+    "gulp-svg-sprite": "^1.3.1",
+    "gulp-svgmin": "^1.2.2",
     "imagemin-jpeg-recompress": "^5.1.0",
     "imagemin-pngquant": "^5.0.1",
-    "uglifyjs-webpack-plugin": "^1.2.2",
-    "webpack": "^4.1.1",
-    "gulp-cheerio": "^0.6.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-svg-sprite": "^1.3.1",
-    "gulp-svgmin": "^1.2.2"
+    "gulp-babel": "^7.0.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-concat": "^2.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matvey-phoen1x/gulp-start.git"
-  },
   "author": "Matvey Phoenix",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/matvey-phoen1x/gulp-start/issues"
-  },
-  "homepage": "https://github.com/matvey-phoen1x/gulp-start"
+  "license": "ISC"
 }

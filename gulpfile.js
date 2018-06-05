@@ -2,13 +2,13 @@ const gulp = require('gulp'),
       pug = require('gulp-pug'),
       sass = require('gulp-sass'),
       rename = require('gulp-rename'),
+      babel = require('gulp-babel'),
+      concat = require('gulp-concat'),
+      uglify = require('gulp-uglify'),
       sourcemaps = require('gulp-sourcemaps'),
       del = require('del'),
       autoprefixer = require('gulp-autoprefixer'),
       browserSync = require('browser-sync').create(),
-      gulpWebpack = require('gulp-webpack'),
-      webpack = require('webpack'),
-      webpackConfig = require('./webpack.config.js'),
       imagemin = require('gulp-imagemin'),
       imageminJpegRecompress = require('imagemin-jpeg-recompress'),
       pngquant = require('imagemin-pngquant'),
@@ -27,16 +27,16 @@ const paths = {
   },
   styles: {
     src: 'src/styles/**/*.scss',
-    dest: 'build/assets/styles/',
+    dest: 'build/assets/styles',
     app: './src/styles/main.scss'
   },
   images: {
-    src: 'src/images/',
-    dest: 'build/assets/images/'
+    src: 'src/images',
+    dest: 'build/assets/images'
   },
   scripts: {
-    src: 'src/scripts/**/*.js',
-    dest: 'build/assets/scripts/'
+    src: 'src/scripts',
+    dest: 'build/assets/scripts'
   },
   fonts: {
     src: 'src/fonts/*.*',
@@ -65,8 +65,12 @@ function clean() {
 }
 
 function scripts() {
-  return gulp.src('src/scripts/**/*.js')
-      .pipe(gulpWebpack(webpackConfig, webpack)) 
+  return gulp.src(paths.scripts.src + '/**/*.js')
+      .pipe(babel({
+        presets: ['env']
+      })) 
+      .pipe(uglify())
+      .pipe(concat('script.min.js'))
       .pipe(gulp.dest(paths.scripts.dest));
 }
 
@@ -86,34 +90,9 @@ function styles() {
     .pipe(gulp.dest(paths.styles.dest))
 }
 
-const config = {
-  mode: {
-    symbol: {
-      sprite: "../sprite.svg",
-      example: {
-        dest: '../spriteDemo.html'
-      }
-    }
-  }
-};
-
 function svg() {
-  return gulp.src('src/images/icons/*.svg')
-    .pipe(svgmin({
-      js2svg: {
-        pretty: true
-      }
-    }))
-    .pipe(cheerio({
-      run: function($) {
-        $('[fill]').removeAttr('fill');
-        $('[stroke]').removeAttr('stroke');
-        $('[style]').removeAttr('style');
-      }
-    }))
-    .pipe(replace('&gt;', '>'))
-    .pipe(svgSprite(config))
-    .pipe(gulp.dest('build/assets/images/svg'));
+  return gulp.src(paths.images.src + '/*.svg')
+    .pipe(gulp.dest(paths.images.dest));
 };
 
 function fonts() {
@@ -122,7 +101,7 @@ function fonts() {
 }
 
 function pic() {
-  return gulp.src('src/images/**/{jpg,png}')
+  return gulp.src(paths.images.src + '/**/*.{jpg,png}')
     .pipe(cache(imagemin([
       imagemin.gifsicle({interlaced: true}),
       imagemin.jpegtran({progressive: true}),
@@ -138,7 +117,7 @@ function pic() {
     ],{
       verbose: true
     })))
-    .pipe(gulp.dest('build/assets/images'));
+    .pipe(gulp.dest(paths.images.dest));
 };
 
 gulp.task('clear', function (done) {
