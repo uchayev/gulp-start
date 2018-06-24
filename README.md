@@ -10,7 +10,7 @@
 
 #### Запуск сборки:
 ```shell
-git clone https://github.com/matvey-phoen1x/gulp-start.git
+git clone https://github.com/mtvphnx/gulp-start.git
 cd gulp-start
 npm i
 gulp start
