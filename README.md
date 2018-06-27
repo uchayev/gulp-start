@@ -9,9 +9,9 @@
 
 
 #### Запуск сборки:
-```shell
-git clone https://github.com/mtvphnx/gulp-start.git
-cd gulp-start
-npm i
-gulp start
-```
+
+1. `git clone https://github.com/mtvphnx/gulp-start.git`
+2. `cd gulp-start
+3. `npm i`
+4. `gulp start`
+
