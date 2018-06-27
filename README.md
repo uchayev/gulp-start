@@ -11,7 +11,7 @@
 #### Запуск сборки:
 
 1. `git clone https://github.com/mtvphnx/gulp-start.git`
-2. `cd gulp-start
+2. `cd gulp-start`
 3. `npm i`
 4. `gulp start`
 
