@@ -1,40 +1,33 @@
-//variables
 $desktops: rem(1200px);
 $laptops: rem(992px);
 $tablets: rem(768px);
 $phones: rem(480px);
 
-//function
 @function rem($pixels) {
   @return #{$pixels / 16px}rem;
 }
 
-//mixins
 @mixin laptop {
   @media screen and (max-width: $laptops){
     @content;
   }
 }
+
 @mixin tablet {
   @media screen and (max-width: $tablets){
     @content;
   }
 }
+
 @mixin phone {
   @media screen and (max-width: $phones){
     @content;
   }
 }
 
-//base
 @import "./common/_normalize.scss";
-@import "./common/_base.scss";
-
-//fonts
 @import "./common/_fonts.scss";
-
-//all
 @import "./common/_general.scss";
 
-//sections
+
 @import "./pages/_index.scss";
