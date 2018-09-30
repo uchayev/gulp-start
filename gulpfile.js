@@ -34,6 +34,10 @@ const paths = {
         src: 'src/images',
         dest: 'build/assets/images'
     },
+    svg: {
+        src: 'src/images/icon',
+        dest: 'build/assets/images'
+    },
     scripts: {
         src: 'src/scripts',
         dest: 'build/assets/scripts'
@@ -113,11 +117,35 @@ function styles() {
         .pipe(gulp.dest(paths.styles.dest));
 }
 
+const config = {
+    mode: {
+        symbol: {
+            sprite: "../sprite.svg",
+            example: {
+                dest: '../spriteDemo.html'
+            }
+        }
+    }
+};
+
 function svg() {
-    return gulp
-        .src(paths.images.src + '/*.svg')
-        .pipe(gulp.dest(paths.images.dest));
-}
+    return gulp.src(paths.svg.src + '/*.svg')
+        .pipe(svgmin({
+            js2svg: {
+                pretty: true
+            }
+        }))
+        .pipe(cheerio({
+            run: function ($) {
+                $('[fill]').removeAttr('fill');
+                $('[stroke]').removeAttr('stroke');
+                $('[style]').removeAttr('style');
+            }
+        }))
+        .pipe(replace('&gt;', '>'))
+        .pipe(svgSprite(config))
+        .pipe(gulp.dest(paths.svg.dest));
+};
 
 function fonts() {
     return gulp.src(paths.fonts.src).pipe(gulp.dest(paths.fonts.build));
@@ -171,6 +199,7 @@ exports.imageminJpegRecompress = imageminJpegRecompress;
 exports.pngquant = pngquant;
 exports.cache = cache;
 exports.pic = pic;
+exports.php = php;
 
 gulp.task(
     'start',
@@ -178,5 +207,13 @@ gulp.task(
         clean,
         gulp.parallel(styles, templates, svg, scripts, libs, php, fonts, pic),
         gulp.parallel(watch, server)
+    )
+);
+
+gulp.task(
+    'build',
+    gulp.series(
+        clean,
+        gulp.parallel(styles, templates, svg, scripts, libs, php, fonts, pic)
     )
 );
