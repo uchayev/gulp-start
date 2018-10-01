@@ -32,61 +32,18 @@
 ### Миксины, функции, переменные scss:
 
 1. Миксин для генерации font-face
-```css
-@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
-    $src: null;
-
-    $extmods: (
-        eot: "?",
-        svg: "#" + str-replace($name, " ", "_")
-    );
-
-    $formats: (
-        otf: "opentype",
-        ttf: "truetype"
-    );
-
-    @each $ext in $exts {
-        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
-    }
-
-    @font-face {
-        font-family: quote($name);
-        font-style: $style;
-        font-weight: $weight;
-        src: $src;
-    }
-}
-```
 Передаем в миксин имя шрифта, путь до файлов, жирность и начертание, а также расширения файлов, которые мы будем использовать (перечисляем без запятых, к примеру `$exts: woff woff2 otf ttf`).
 ```css
-@include font-face(<имя>, './../fonts/<имя>', <жирность>, <начертание>, $exts: <расширения>);
+@include font-face(<имя>, '<путь>', <жирность>, <начертание>, $exts: <расширения>);
 ```
 
 2. Миксин для использования шрифтов
-```css
-@mixin имя($style) {
-  font-family: <имя>, <альтернатива>, <семейство>;
-
-  @if $style == <стиль> {
-    font-weight: <жирность>;
-    font-style: <начертание>;
-  }
-}
-```
 Передаем в миксин имя заранее созданного в файле _fonts.scss шрифта, и параметр стиля (если у шрифта есть разные начертания).
 ```css
 @mixin <имя>(<стиль>);
 ```
 
 3. Функция перевода px в rem
-```css
-@function rem($pixels) {
-  @return #{$pixels / 16px}rem;
-}
-```
 Передаем в эту функцию количество пикселей, к примеру так:
 ```css
 font-size: rem(14px);
@@ -101,22 +58,7 @@ $phones: rem(480px);
 ```
 
 5. Миксин для адаптации
-```css
-@mixin <имя> {
-  @media screen and (max-width: <размер>){
-    @content;
-  }
-}
-```
-Данный миксин вызывается прямо в селекторе, его можно использовать вместе с переменными брекпоинтов. К примеру, если мы хотим изменить цвет блока .block на красный, на мобильных телефонах с разрешением меньше 480px, создаем миксин для мобильных устройств:
-```css
-@mixin phone {
-  @media screen and (max-width: $phones){
-    @content;
-  }
-}
-```
-а затем вызываем его:
+Данный миксин вызывается прямо в селекторе, его можно использовать вместе с переменными брекпоинтов. К примеру, если мы хотим изменить цвет блока .block на красный, на мобильных телефонах с разрешением меньше 480px, вызываем миксин для мобильных устройств:
 ```css
 .block {
     @include phone {
