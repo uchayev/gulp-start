@@ -1,7 +1,3 @@
-//- bemto
-//- Copyright(c) 2012 Roman Komarov <kizu@kizu.ru>
-//- MIT Licensed
-
 include tag_metadata.pug
 
 -
@@ -39,7 +35,6 @@ include tag_metadata.pug
   var set_bemto_setting = function(name, value) {
     bemto_settings[name] = value;
 
-    //- Resetting the old variable-type setting
     if (name == 'prefix' && bemto_settings_prefix !== undefined) { bemto_settings_prefix = undefined; }
     if (name == 'element' && bemto_settings_element !== undefined) { bemto_settings_element = undefined; }
     if (name == 'modifier' && bemto_settings_modifier !== undefined) { bemto_settings_modifier = undefined; }
