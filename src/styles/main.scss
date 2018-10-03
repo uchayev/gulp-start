@@ -25,6 +25,24 @@ $phones: rem(480px);
   }
 }
 
+@mixin below($width, $orientation: 'width') {
+    @media screen and (max-#{$orientation}: $width) {
+        @content;
+    }
+}
+
+@mixin above($width, $orientation: 'width') {
+    @media screen and (min-#{$orientation}: $width) {
+        @content;
+    }
+}
+
+@mixin between($minWidth, $maxWidth, $orientation: 'width') {
+    @media screen and (min-#{$orientation}: $minWidth) and (max-#{$orientation}: $maxWidth) {
+        @content;
+    }
+}
+
 @import "./common/_normalize.scss";
 @import "./common/_fonts.scss";
 @import "./common/_general.scss";
