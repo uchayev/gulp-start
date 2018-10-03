@@ -16,7 +16,8 @@ const gulp = require('gulp'),
     svgSprite = require('gulp-svg-sprite'),
     svgmin = require('gulp-svgmin'),
     cheerio = require('gulp-cheerio'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    prettyHtml = require('gulp-pretty-html');
 
 const paths = {
     root: './build',
@@ -102,7 +103,8 @@ function libs() {
 function templates() {
     return gulp
         .src(paths.templates.pages)
-        .pipe(pug({ pretty: true }))
+        .pipe(pug({ pretty: false }))
+        .pipe(prettyHtml())
         .pipe(gulp.dest(paths.root));
 }
 
